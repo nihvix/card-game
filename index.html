@@ -10,24 +10,97 @@
 </head>
 
 <body>
-    <!--BLOQUE CABECERA-->
-
+    <!------------BLOQUE CABECERA------------>
     <header>
-        <!--logo-->
+        <img src="img/logo.jpg" alt="Logo Pikachu">
     </header>
 
-    <!--BLOQUE PRINCIPAL-->
+    <!------------BLOQUE PRINCIPAL------------>
     <main>
+        <!--BLOQUE DE ERROR-->
+        <div>
+            <p id="error"></p>
+        </div>
+        <!------------BLOQUE FORMULARIO------------>
+        <form action="#" id="inputForm">
+            <!--Bloque nombre de usuario -->
+            <div class="itemForm">
+                <label for="nick">Enter your nickname: </label>
+                <input id="nick_arroba" type="text" name="nick" value="@" readonly>
+                <input id="nick" type="text" name="nick" minlength="2" placeholder="Ash">
+            </div>
+            <!--Bloque dificultad -->
+            <div class="itemForm">
+                <label for="difficulty">Difficulty: </label>
+                <select name="difficulty" id="difficulty">
+                    <option value="0" disabled selected>--Please select a level--</option>
+                    <option value="1">Easy</option>
+                    <option value="2">Normal</option>
+                    <option value="3">Hard</option>
+                </select>
+            </div>
+            <!-- Bloque tamaño del panel de juego -->
+            <div class="itemForm">
+                <label for="size">Difficulty: </label>
+                <select name="size" id="size">
+                    <option value="0" disabled selected>--Please select a size--</option>
+                    <option value="3">3x3</option>
+                    <option value="4">4x4</option>
+                    <option value="5">5x5</option>
+                </select>
+            </div>
+            <!-- Bloque avatares del jugador -->
+            <div class="itemForm">
+                <div id="avatar">
+                    <label for="avatar">Avatar</label>
+                    <div id="mainAvatar">
+                        <img src="./avatarImg/Poké-Ball.png" alt="Avatar Selected" id="avatarImg">
+                    </div>
+                </div>
+                <div id="avatarGrid">
+                    <div class="avatarItem">
+                        <img src="./avatarImg/Poké-Ball.png" class="avatarImgItem" alt="Pokeball_Icon" draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./avatarImg/Malla-Ball.png" class="avatarImgItem" alt="Pokeball_Icon"
+                            draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./avatarImg/Master-Ball.png" class="avatarImgItem" alt="Pokeball_Icon"
+                            draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./avatarImg/Safari-Ball.png" class="avatarImgItem" alt="Pokeball_Icon"
+                            draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./avatarImg/Super-Ball.png" class="avatarImgItem" alt="Pokeball_Icon"
+                            draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./avatarImg/Ultra-Ball.png" class="avatarImgItem" alt="Pokeball_Icon"
+                            draggable="true">
+                    </div>
+                </div>
+            </div>
+            <!-- Bloque envío -->
+            <div class="itemForm">
 
+            </div>
+        </form>
     </main>
 
-    <!--BLOQUE PIE DE PÁGINA-->
+    <!------------BLOQUE PIE DE PÁGINA------------>
     <footer>
-        <!--créditos-->
-        <!--gif marquesina-->
+        <!--Créditos-->
+        <p>Pokemon card game by Inma Quesada.</p>
+        <!--Gif marquesina-->
+        <marquee direction="right">
+            <img id="gif" alt="" src="./img/pikachu.gif">
+        </marquee>
     </footer>
 
-    <!--ENLACE AL JS-->
+    <!------------ENLACE AL JS------------>
     <script defer src="js/form.js"></script>
 </body>
 
