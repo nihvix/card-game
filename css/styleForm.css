@@ -1,17 +1,24 @@
 /* =========================
             GENERAL
    =========================*/
-img{
+body{
+   box-sizing: border-box;
+   background-color: #f5f5f5;
+   font-family: 'Poppins', sans-serif;
+}
+img {
    width: 25px;
 }
+
 /* =========================
             CABECERA
    =========================*/
-header img{
+header img {
    width: 75px;
    border-radius: 100%;
    border: 2px solid darkblue;
 }
+
 /* ======================
             MAIN
    ======================*/
@@ -19,3 +26,7 @@ header img{
 /* =========================
         PIE DE PÁGINA
    =========================*/
+footer {
+   color: #f5f5f5;
+   background-color: #453F78;
+}

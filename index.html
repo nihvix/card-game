@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/styleForm.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>PKMN GAME</title>
 </head>
 
@@ -25,13 +29,13 @@
         <form action="#" id="inputForm">
             <!--Bloque nombre de usuario -->
             <div class="itemForm">
-                <label for="nick">Enter your nickname: </label>
+                <label for="nick">Enter your nickname:* </label>
                 <input id="nick_arroba" type="text" name="nick" value="@" readonly>
                 <input id="nick" type="text" name="nick" minlength="2" placeholder="Ash">
             </div>
             <!--Bloque dificultad -->
             <div class="itemForm">
-                <label for="difficulty">Difficulty: </label>
+                <label for="difficulty">Difficulty:* </label>
                 <select name="difficulty" id="difficulty">
                     <option value="0" disabled selected>--Please select a level--</option>
                     <option value="1">Easy</option>
@@ -41,7 +45,7 @@
             </div>
             <!-- Bloque tamaño del panel de juego -->
             <div class="itemForm">
-                <label for="size">Difficulty: </label>
+                <label for="size">Size:* </label>
                 <select name="size" id="size">
                     <option value="0" disabled selected>--Please select a size--</option>
                     <option value="3">3x3</option>
@@ -83,9 +87,14 @@
                     </div>
                 </div>
             </div>
+            <div class="requiredInput">
+                <p>*Required</p>
+            </div>
             <!-- Bloque envío -->
             <div class="itemForm">
-
+                <div class="itemform">
+                    <input type="submit" value="PLAY" id="play">
+                </div>
             </div>
         </form>
     </main>
