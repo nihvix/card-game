@@ -1,32 +1,96 @@
 /* =========================
             GENERAL
    =========================*/
-body{
+body {
    box-sizing: border-box;
    background-color: #f5f5f5;
    font-family: 'Poppins', sans-serif;
 }
+
+
 img {
    width: 25px;
 }
 
-/* =========================
-            CABECERA
-   =========================*/
+#error {
+   text-align: center;
+   color: #fd0c49;
+   font-weight: 300;
+   font-size: 14px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   ;
+}
+
+/* ===============================
+      CABECERA Y PIE DE PÁGINA
+   ===============================*/
+header,
+footer {
+   text-align: center;
+   width: 100%;
+   margin: 30px auto 0px auto;
+}
+
 header img {
    width: 75px;
    border-radius: 100%;
    border: 2px solid darkblue;
 }
 
+footer {
+   position: absolute;
+   bottom: 0;
+   color: #f5f5f5;
+   background-color: #453F78;
+}
+
 /* ======================
             MAIN
    ======================*/
+main {
+   width: 75%;
+   margin: 8% auto 0% auto;
+}
 
-/* =========================
-        PIE DE PÁGINA
-   =========================*/
-footer {
-   color: #f5f5f5;
-   background-color: #453F78;
+form {
+   font-size: 18px;
+   display: flex;
+   flex-direction: column;
+   row-gap: 20px;
+}
+
+label {
+   display: block;
+   /*Por defecto: inline*/
+   margin-bottom: 10px;
+   width: 100%;
+}
+
+input {
+   display: inline;
+   width: 236px;
+   border: 1px solid #ced4da;
+   padding: 10px;
+   border-radius: 0px 5px 5px 0px;
+   font-family: 'Poppins', sans-serif;
+   font-weight: bold;
+   font-weight: 300;
+   font-size: 18px;
+}
+
+select {
+   font-family: 'Poppins', sans-serif;
+   width: 100%;
+   border: 1px solid #ced4da;
+   border-radius: 5px;
+   font-size: 18px;
+}
+
+/* ====================
+         AVATAR
+   ====================*/
+.itemForm, #avatarGrid{ /*Temporal*/
+   display: flex;
+   flex-flow: row wrap;
 }
