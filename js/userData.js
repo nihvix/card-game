@@ -40,6 +40,19 @@ function getUserData() {
 }
 
 /**
+ * Función para comprobar que nos meten los datos en el sessionStorage
+ * así no se lo pueden saltar poniendo "game.html"
+ * @returns false/true según  si el formulario se ha completado correctamente
+ */
+function checkUserData() {
+    if (nick == null) { //Es decir, no hay SessionStorage
+        sessionStorage.setItem("error", "Form not filled correctly!");
+        return false;
+    }
+    return true;
+}
+
+/**
 * Función para realizar la petición y almacenamiento de la geolocalización del usuario
 */
 function dataGeolocation() {
