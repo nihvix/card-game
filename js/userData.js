@@ -14,12 +14,29 @@ var geolocationTxT;
 /* ==============================
             FUNCIONES
    ==============================*/
+/**
+ * Función que almacena en el sessionStorage la info del form una vez rellenado correctamente
+ * @param {*} nickInput 
+ * @param {*} difficultyInput 
+ * @param {*} sizeInput 
+ * @param {*} avatarContainer 
+ */
 function saveUserData(nickInput, difficultyInput, sizeInput, avatarContainer) {
     sessionStorage.setItem("nick", nickInput.value);
     sessionStorage.setItem("difficulty", difficultyInput.value);
     sessionStorage.setItem("size", sizeInput.value);
     sessionStorage.setItem("avatarImg", avatarContainer.src);
     sessionStorage.setItem("geolocation", geolocationTxT.value);
+}
+
+/**
+ * Función para obtener los datos de usuario 
+ */
+function getUserData() {
+    nick = sessionStorage.getItem("nick");
+    difficulty = sessionStorage.getItem("difficulty");
+    email = sessionStorage.getItem("email");
+    avatarImg = sessionStorage.getItem("avatarImg");
 }
 
 /**
