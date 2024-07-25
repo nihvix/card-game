@@ -6,7 +6,9 @@
 /* ===========================================
          INICIALIZACIÓN VARIABLES
 ==============================================*/
+//--- Ambas variables dependen del nivel de dificultad del formulario
 var visibleTime;
+var throwsLeft;
 
 /* ==============================
             FUNCIONES
@@ -20,6 +22,14 @@ function fillUserForm() {
    panelSize = parseInt(size);
 }
 
+function difficultyDetails() {
+   let level = difficulty;
+   let nCards = size * size;
+   visibleTime = 5 - level;
+   throwsLeft = parseInt((nCards / 2) + (10 / level));
+   document.getElementById("throws").value += throwsLeft;
+}
+
 /* =======================================
             LLAMADAS A FUNCIONES
    =======================================*/
@@ -31,5 +41,9 @@ getUserData();
 if (!checkUserData()) {
    location = "index.html";
 }
+
 //Rellenamos la info del usuario
 fillUserForm();
+
+//Establecemos detalles según dificultad
+difficultyDetails();

@@ -35,7 +35,7 @@ function saveUserData(nickInput, difficultyInput, sizeInput, avatarContainer) {
 function getUserData() {
     nick = sessionStorage.getItem("nick");
     difficulty = sessionStorage.getItem("difficulty");
-    email = sessionStorage.getItem("email");
+    size = sessionStorage.getItem("size");
     avatarImg = sessionStorage.getItem("avatarImg");
 }
 
