@@ -5,13 +5,20 @@
 /* ==============================
         VARIABLES GLOBALES
    ==============================*/
+var nick;
+var difficulty;
+var size;
+var avatarImg;
 var geolocationTxT;
-
 
 /* ==============================
             FUNCIONES
    ==============================*/
-function saveUserData() {
+function saveUserData(nickInput, difficultyInput, sizeInput, avatarContainer) {
+    sessionStorage.setItem("nick", nickInput.value);
+    sessionStorage.setItem("difficulty", difficultyInput.value);
+    sessionStorage.setItem("size", sizeInput.value);
+    sessionStorage.setItem("avatarImg", avatarContainer.src);
     sessionStorage.setItem("geolocation", geolocationTxT.value);
 }
 
