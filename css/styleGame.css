@@ -43,7 +43,8 @@ input {
    font-weight: 200;
    font-size: 18px;
 }
-.itemform img{
+
+.itemform img {
    float: left;
    border: 1px solid #ced4da;
    padding: 2px;
@@ -51,7 +52,8 @@ input {
    border-radius: 5px 0px 0px 5px;
    background-color: #453F78;
 }
-.itemform #nick{
+
+.itemform #nick {
    width: 180px;
 }
 
@@ -61,7 +63,7 @@ input {
    width: 230px;
 }
 
-.containerItem {
+.cardsContainer {
    display: flex;
    align-items: center;
    justify-content: center;
@@ -97,7 +99,7 @@ input {
    border-radius: 5px 5px 0px 0px;
 }
 
-.finishedGameColor{
+.finishedGameColor {
    background-color: #263238;
    transition: background-color 0.4s;
 }
@@ -128,12 +130,12 @@ input {
 #gameTitle {
    margin-top: 400px;
    width: 500px;
-   background-color:#453F78;
+   background-color: #453F78;
    border: 1px solid #ced4da;
    border-radius: 0px 0px 5px 5px;
    padding-top: 10px;
    padding-bottom: 10px;
-   color:#FFC94A;
+   color: #FFC94A;
    text-align: center;
 }
 
@@ -145,6 +147,54 @@ input {
 #userContainer {
    width: 290px;
 }
+
+/* ====================
+        TARJETAS
+   ====================*/
+
+.flipCardContainer {
+   background-color: transparent;
+   width: 70px;
+   height: 75px;
+   perspective: 1000px;
+   /* Para el efecto 3D */
+}
+
+.flipCard {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   text-align: center;
+   transition: transform 0.8s;
+   transform-style: preserve-3d;
+}
+
+.flipCard img {
+   width: 100%;
+   height: 100%;
+}
+
+/* Giro horizontal del contenedor */
+.flipCardContainer:hover .flipCard {
+   transform: rotateY(180deg);
+}
+
+.flipCardFront,
+.flipCardBack {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   border: 1px solid black;
+   -webkit-backface-visibility: hidden;
+   /* Safari */
+   backface-visibility: hidden;
+}
+
+.flipCardBack {
+   background-color: rgb(249, 246, 212);
+   transform: rotateY(180deg);
+}
+
 /* =========================
         PIE DE PÁGINA
    =========================*/
