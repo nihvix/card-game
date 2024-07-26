@@ -93,7 +93,7 @@ input {
    justify-items: center;
    align-items: center;
    width: 500px;
-   min-height: 400px;
+   min-height: 450px;
    background-color: #fff;
    border: 1px solid #C08B5C;
    border-radius: 5px 5px 0px 0px;
@@ -113,6 +113,7 @@ input {
    border: 1px solid #ced4da;
    border-radius: 5px 5px 0px 0px;
    width: 500px;
+   min-height: 450px;
 }
 
 #finishedGame button {
@@ -128,7 +129,7 @@ input {
 }
 
 #gameTitle {
-   margin-top: 400px;
+   margin-top: 450px;
    width: 500px;
    background-color: #453F78;
    border: 1px solid #ced4da;
@@ -155,7 +156,7 @@ input {
 .flipCardContainer {
    background-color: transparent;
    width: 70px;
-   height: 75px;
+   height: 70px;
    perspective: 1000px;
    /* Para el efecto 3D */
 }
