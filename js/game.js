@@ -8,6 +8,8 @@
 ==============================================*/
 
 var nCards;
+var visibleCards = [];
+var arrayImg = [];
 //--- Ambas variables dependen del nivel de dificultad del formulario
 var visibleTime;
 var throwsLeft;
@@ -15,6 +17,15 @@ var throwsLeft;
 /* ==============================
             FUNCIONES
    ==============================*/
+/**
+* Función que devuelve un número random entre 0 y max
+* @param {int} max 
+* @returns 
+*/
+function getRandomInt(max) {
+   return Math.floor(Math.random() * (max - 1) + 1);
+}
+
 /**
  * Función para obtener la información del usuario de la parte derecha del menú
  */
@@ -31,24 +42,45 @@ function difficultyDetails() {
    document.getElementById("throws").value += throwsLeft;
 }
 
-function drawPanel(){
+function fillArrayImg() {
+   for (let i = 1; i <= nCards / 2; i++) {
+      arrayImg.push(i);
+      arrayImg.push(i);
+   }
+   if (nCards % 2 == 1) //Para tableros impares
+      arrayImg.push(13);
+}
+
+function drawPanel() {
+   for (let i = 0; i < nCards; i++) {
+      visibleCards.push(false);
+   }
+
+   fillArrayImg();
    document.getElementById("game").style.gridTemplateColumns = "repeat(" + size + ", 1fr)";
    document.getElementById("game").style.gridTemplateRows = "repeat(" + size + ", 1fr)";
-   let items="";
+   let items = "";
    for (let index = 1; index <= nCards; index++) { //El index lo utlizaremos para el cálculo de los puntos adyacentes luego
-      
+      console.log("size: ", arrayImg.length);
+      let posArrayImg = getRandomInt(arrayImg.length - 1);
+      console.log("posArrayImg: ", posArrayImg);
+      let cont = arrayImg[posArrayImg];
+      console.log("cont: ", cont);
       items += `<div class="flipCardContainer">
                         <div class="flipCard">
                             <div class="flipCardFront">
                                 <img src="./img/front.jpg">
                             </div>
                             <div class="flipCardBack">
-                                <img id="img${index}" src="./img/image${index}.png">
+                                <img id="img${index}" src="./img/image${cont}.png">
                             </div>
                         </div>
                     </div>`; //Comillas evaluativas para poder meter variable
-  }
-  document.getElementById("game").innerHTML = items;
+      arrayImg.splice(posArrayImg, 1);
+
+      console.log(arrayImg);
+   }
+   document.getElementById("game").innerHTML = items;
 }
 
 /* =======================================
