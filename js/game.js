@@ -35,6 +35,9 @@ function fillUserForm() {
    nCards = size * size;
 }
 
+/**
+ * Función que establece el tiempo que cada carta permanece visible y el número de tiradas según el nivel de dificultad
+ */
 function difficultyDetails() {
    let level = difficulty;
    visibleTime = 5 - level;
@@ -42,6 +45,10 @@ function difficultyDetails() {
    document.getElementById("throws").value += throwsLeft;
 }
 
+/**
+ * Función que rellena un array con números según la cantidad de tarjetas de la partida
+ * para seleccionar las imágenes y que sólo se repitan 2 veces max
+ */
 function fillArrayImg() {
    for (let i = 1; i <= nCards / 2; i++) {
       arrayImg.push(i);
@@ -51,6 +58,9 @@ function fillArrayImg() {
       arrayImg.push(13);
 }
 
+/**
+ * Método que dibuja el panel de juego
+ */
 function drawPanel() {
    for (let i = 0; i < nCards; i++) {
       visibleCards.push(false);
@@ -60,12 +70,9 @@ function drawPanel() {
    document.getElementById("game").style.gridTemplateColumns = "repeat(" + size + ", 1fr)";
    document.getElementById("game").style.gridTemplateRows = "repeat(" + size + ", 1fr)";
    let items = "";
-   for (let index = 1; index <= nCards; index++) { //El index lo utlizaremos para el cálculo de los puntos adyacentes luego
-      console.log("size: ", arrayImg.length);
+   for (let index = 1; index <= nCards; index++) {
       let posArrayImg = getRandomInt(arrayImg.length - 1);
-      console.log("posArrayImg: ", posArrayImg);
       let cont = arrayImg[posArrayImg];
-      console.log("cont: ", cont);
       items += `<div class="flipCardContainer">
                         <div class="flipCard">
                             <div class="flipCardFront">
@@ -75,12 +82,27 @@ function drawPanel() {
                                 <img id="img${index}" src="./img/image${cont}.png">
                             </div>
                         </div>
-                    </div>`; //Comillas evaluativas para poder meter variable
+                    </div>`;
       arrayImg.splice(posArrayImg, 1);
 
       console.log(arrayImg);
    }
    document.getElementById("game").innerHTML = items;
+}
+
+/**
+ * Método que realiza el cambio de pantalla al final de la partida
+ */
+function finishingGame(){
+   let count=parseInt(document.getElementById("throws").value);
+   if(count==0){
+        //Cambiar z-index de los paneles (pantalla PLAY AGAIN)
+        document.getElementById("finishedGame").classList.add("finishedGameColor"); //Añadimos la clase de color para las transiciones de la última pantalla
+        document.getElementById("finishedGame").style.zIndex = "2";
+        document.getElementById("game").style.zIndex = "1";
+        document.getElementById("newGame").addEventListener("click", 
+            (e) => { location.reload() }); //Se recarga la misma página para empezar una nueva partida
+   }
 }
 
 /* =======================================
@@ -103,3 +125,8 @@ difficultyDetails();
 
 //Dibujar tarjetas
 drawPanel();
+
+//
+
+//Finalizar partida
+finishingGame(); //Debe ser llamada tras cada emparejamiento
