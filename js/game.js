@@ -10,6 +10,7 @@
 var nCards;
 var visibleCards = [];
 var arrayImg = [];
+var item
 //--- Ambas variables dependen del nivel de dificultad del formulario
 var visibleTime;
 var throwsLeft;
@@ -74,7 +75,7 @@ function drawPanel() {
       let posArrayImg = getRandomInt(arrayImg.length - 1);
       let cont = arrayImg[posArrayImg];
       items += `<div class="flipCardContainer">
-                        <div class="flipCard">
+                        <div id="flip${index}" class="flipCard">
                             <div class="flipCardFront">
                                 <img src="./img/front.jpg">
                             </div>
@@ -85,23 +86,35 @@ function drawPanel() {
                     </div>`;
       arrayImg.splice(posArrayImg, 1);
 
-      console.log(arrayImg);
    }
    document.getElementById("game").innerHTML = items;
 }
 
+function startMarking(event) {
+   item = event.target;
+   console.log("hola");
+   item.classList.toggle('is-flipped');}
+
+function gameEvents() {
+   const items = document.getElementsByClassName("flipCard");
+   for (let item of items) {
+      item.addEventListener('mousedown', startMarking);
+   }
+}
+
+
 /**
  * Método que realiza el cambio de pantalla al final de la partida
  */
-function finishingGame(){
-   let count=parseInt(document.getElementById("throws").value);
-   if(count==0){
-        //Cambiar z-index de los paneles (pantalla PLAY AGAIN)
-        document.getElementById("finishedGame").classList.add("finishedGameColor"); //Añadimos la clase de color para las transiciones de la última pantalla
-        document.getElementById("finishedGame").style.zIndex = "2";
-        document.getElementById("game").style.zIndex = "1";
-        document.getElementById("newGame").addEventListener("click", 
-            (e) => { location.reload() }); //Se recarga la misma página para empezar una nueva partida
+function finishingGame() {
+   let count = parseInt(document.getElementById("throws").value);
+   if (count == 0) {
+      //Cambiar z-index de los paneles (pantalla PLAY AGAIN)
+      document.getElementById("finishedGame").classList.add("finishedGameColor"); //Añadimos la clase de color para las transiciones de la última pantalla
+      document.getElementById("finishedGame").style.zIndex = "2";
+      document.getElementById("game").style.zIndex = "1";
+      document.getElementById("newGame").addEventListener("click",
+         (e) => { location.reload() }); //Se recarga la misma página para empezar una nueva partida
    }
 }
 
@@ -126,7 +139,8 @@ difficultyDetails();
 //Dibujar tarjetas
 drawPanel();
 
-//
+//Eventos del juego
+gameEvents();
 
 //Finalizar partida
 finishingGame(); //Debe ser llamada tras cada emparejamiento

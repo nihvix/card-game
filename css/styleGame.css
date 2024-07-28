@@ -176,9 +176,12 @@ input {
 }
 
 /* Giro horizontal del contenedor */
-.flipCardContainer:hover .flipCard {
+/*.flipCardContainer:hover .flipCard {
    transform: rotateY(180deg);
-}
+}*/
+.flipCard.is-flipped {
+   transform: rotateY(180deg);
+ }
 
 .flipCardFront,
 .flipCardBack {
