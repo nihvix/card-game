@@ -12,6 +12,7 @@ var visibleCards = [];
 var arrayImg = [];
 var item;
 var prevItem; //para ir comparando tarjetas
+var score = 0;
 //--- Ambas variables dependen del nivel de dificultad del formulario
 var visibleTime;
 var throwsLeft;
@@ -41,6 +42,7 @@ function fillUserForm() {
  * Función que establece el tiempo que cada carta permanece visible y el número de tiradas según el nivel de dificultad
  */
 function difficultyDetails() {
+
    let level = difficulty;
    visibleTime = 5 - level;
    throwsLeft = parseInt((nCards / 2) + (10 / level));
@@ -92,12 +94,41 @@ function drawPanel() {
 }
 
 /**
+ * Función para volver a girar la tarjeta una vez que el tiempo visible se acaba
+ * @param {HTML Element} item 
+ */
+function flipBackAgain(item) {
+   item.classList.remove('is-flipped');
+}
+
+/**
  * Función que comienza al hacer click en una imagen
  * @param {Event} event 
  */
 function startMarking(event) {
    item = event.currentTarget;
    item.classList.add('is-flipped');
+   if (prevItem != null) { //Añadir que se comparen si ambas están visibles
+      document.getElementById("throws").value = parseInt(document.getElementById("throws").value) - 1;
+
+      //Comparamos las imágenes
+      console.log(item);
+      let frontPrev = prevItem.getElementsByTagName("img")[1].src;
+      let frontCurrent = item.getElementsByTagName("img")[1].src;
+      console.log("prev", frontPrev);
+      console.log("cur", frontCurrent);
+      if (frontPrev == frontCurrent && prevItem.classList.contains('is-flipped')) {
+         score++;
+         document.getElementById("score").value = score;
+         //WORKING ON -- Las mantenemos hacia arriba y quitamos el listener para que no se puedan clickar 
+         //item.classList.add('is-flipped');
+         //prevItem.classList.add('is-flipped');
+         //item.removeEventListener('mousedown', startMarking);
+         //prevItem.removeEventListener('mousedown', startMarking);
+      }
+   }
+   setTimeout(flipBackAgain, (visibleTime * 1000), item);
+   prevItem = item;
 }
 
 /**
