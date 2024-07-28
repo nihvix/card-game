@@ -10,7 +10,8 @@
 var nCards;
 var visibleCards = [];
 var arrayImg = [];
-var item
+var item;
+var prevItem; //para ir comparando tarjetas
 //--- Ambas variables dependen del nivel de dificultad del formulario
 var visibleTime;
 var throwsLeft;
@@ -90,18 +91,24 @@ function drawPanel() {
    document.getElementById("game").innerHTML = items;
 }
 
+/**
+ * Función que comienza al hacer click en una imagen
+ * @param {Event} event 
+ */
 function startMarking(event) {
-   item = event.target;
-   console.log("hola");
-   item.classList.toggle('is-flipped');}
+   item = event.currentTarget;
+   item.classList.add('is-flipped');
+}
 
+/**
+ * Función donde se establecen los eventos del juego
+ */
 function gameEvents() {
    const items = document.getElementsByClassName("flipCard");
    for (let item of items) {
       item.addEventListener('mousedown', startMarking);
    }
 }
-
 
 /**
  * Método que realiza el cambio de pantalla al final de la partida
@@ -143,4 +150,4 @@ drawPanel();
 gameEvents();
 
 //Finalizar partida
-finishingGame(); //Debe ser llamada tras cada emparejamiento
+//finishingGame(); //Debe ser llamada tras cada emparejamiento

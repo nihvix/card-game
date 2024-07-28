@@ -165,8 +165,9 @@ input {
    position: relative;
    width: 100%;
    height: 100%;
+   cursor: pointer;
    text-align: center;
-   transition: transform 0.8s;
+   transition: transform 1s;
    transform-style: preserve-3d;
 }
 
@@ -181,7 +182,7 @@ input {
 }*/
 .flipCard.is-flipped {
    transform: rotateY(180deg);
- }
+}
 
 .flipCardFront,
 .flipCardBack {
