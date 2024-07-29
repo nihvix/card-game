@@ -12,6 +12,8 @@ var arrayImg = [];
 var item;
 var prevItem; //para ir comparando tarjetas
 var score = 0;
+var cardMatch = [];
+var match = false;
 //--- Ambas variables dependen del nivel de dificultad del formulario
 var visibleTime;
 var throwsLeft;
@@ -43,8 +45,8 @@ function fillUserForm() {
 function difficultyDetails() {
 
    let level = difficulty;
-   visibleTime = 5 - level;
-   throwsLeft = parseInt((nCards / 2) + (10 / level));
+   visibleTime = 4 - level;
+   throwsLeft = parseInt(nCards + (20 / level));
    document.getElementById("throws").value += throwsLeft;
 }
 
@@ -62,7 +64,7 @@ function fillArrayImg() {
 }
 
 /**
- * Método que dibuja el panel de juego
+ * Método que dibuja el panel de juego y crea el array de coincidencias/parejas (match)
  */
 function drawPanel() {
    fillArrayImg();
@@ -86,6 +88,11 @@ function drawPanel() {
 
    }
    document.getElementById("game").innerHTML = items;
+
+   //Para los emparejamientos de cartas
+   for (let i = 0; i < nCards; i++) {
+      cardMatch.push(false);
+   }
 }
 
 /**
@@ -103,8 +110,10 @@ function checkFinish() {
  * Función para volver a girar la tarjeta una vez que el tiempo visible se acaba
  * @param {HTML Element} item 
  */
-function flipBackAgain(item) {
-   item.classList.remove('is-flipped');
+function flipBackAgain(item, pos) {
+   if (!cardMatch[pos - 1]) {
+      item.classList.remove('is-flipped');
+   }
 }
 
 /**
@@ -113,32 +122,42 @@ function flipBackAgain(item) {
  */
 function startMarking(event) {
    item = event.currentTarget;
-   item.classList.add('is-flipped');
-   if (prevItem != null) { //Añadir que se comparen si ambas están visibles
-      document.getElementById("throws").value = parseInt(document.getElementById("throws").value) - 1;
+   let pos = parseInt(item.id.substring(item.id.indexOf("p") + 1)); //Eliminar "flip" del id del item
+   console.log(pos);
+   if (!cardMatch[pos - 1]) {
+      item.classList.add('is-flipped');
+      if (prevItem != null) {
+         //Comparamos las imágenes
+         console.log(item);
+         let frontPrev = prevItem.getElementsByTagName("img")[1].src;
+         let frontCurrent = item.getElementsByTagName("img")[1].src;
+         console.log("prev", frontPrev);
+         console.log("cur", frontCurrent);
+         if (frontPrev == frontCurrent && prevItem.classList.contains('is-flipped')) {
+            match = true;
+            score++;
+            document.getElementById("score").value = score;
+         }
+         //Si hay coincidencia, las mantenemos hacia arriba y eliminamos el listener para que no se puedan clickar
+         if (match) {
+            item.classList.add('is-flipped');
+            prevItem.classList.add('is-flipped');
+            item.removeEventListener('mousedown', startMarking);
+            prevItem.removeEventListener('mousedown', startMarking);
+            //Añadimos las pos como true al array de coincidencias, para que no gire las cartas de nuevo
+            let posPrevItem = prevItem.id.substring(item.id.indexOf("p") + 1);
+            cardMatch[pos - 1] = true;
+            cardMatch[posPrevItem - 1] = true;
 
-      //Comparamos las imágenes
-      console.log(item);
-      let frontPrev = prevItem.getElementsByTagName("img")[1].src;
-      let frontCurrent = item.getElementsByTagName("img")[1].src;
-      console.log("prev", frontPrev);
-      console.log("cur", frontCurrent);
-      if (frontPrev == frontCurrent && prevItem.classList.contains('is-flipped')) {
-         score++;
-         document.getElementById("score").value = score;
-         //WORKING ON -- Las mantenemos hacia arriba y quitamos el listener para que no se puedan clickar 
-         item.classList.add('is-flipped');
-         prevItem.classList.add('is-flipped');
-         item.removeEventListener('mousedown', startMarking);
-         prevItem.removeEventListener('mousedown', startMarking);
-      } else {
-         setTimeout(flipBackAgain, (visibleTime * 1000), item);
+            match = false;
+            prevItem = null;
+         }
       }
-   } else {
-      setTimeout(flipBackAgain, (visibleTime * 1000), item);
+      setTimeout(flipBackAgain, (visibleTime * 1000), item, pos);
+      document.getElementById("throws").value = parseInt(document.getElementById("throws").value) - 1;
+      checkFinish();
+      prevItem = item;
    }
-   checkFinish();
-   prevItem = item;
 }
 
 /**
@@ -187,6 +206,3 @@ drawPanel();
 
 //Eventos del juego
 gameEvents();
-
-//Finalizar partida
-//finishingGame(); //Debe ser llamada tras cada emparejamiento
