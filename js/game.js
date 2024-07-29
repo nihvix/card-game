@@ -8,7 +8,6 @@
 ==============================================*/
 
 var nCards;
-var visibleCards = [];
 var arrayImg = [];
 var item;
 var prevItem; //para ir comparando tarjetas
@@ -66,10 +65,6 @@ function fillArrayImg() {
  * Método que dibuja el panel de juego
  */
 function drawPanel() {
-   for (let i = 0; i < nCards; i++) {
-      visibleCards.push(false);
-   }
-
    fillArrayImg();
    document.getElementById("game").style.gridTemplateColumns = "repeat(" + size + ", 1fr)";
    document.getElementById("game").style.gridTemplateRows = "repeat(" + size + ", 1fr)";
@@ -91,6 +86,17 @@ function drawPanel() {
 
    }
    document.getElementById("game").innerHTML = items;
+}
+
+/**
+ * Función que, tras cada tirada, comprueba si la partida ha acabado
+ */
+function checkFinish() {
+   let currentScore = parseInt(document.getElementById("score").value);
+   let currentThrows = parseInt(document.getElementById("throws").value);
+   if (currentScore == (nCards / 2) || currentThrows == 0) {
+      finishingGame();
+   }
 }
 
 /**
@@ -121,13 +127,17 @@ function startMarking(event) {
          score++;
          document.getElementById("score").value = score;
          //WORKING ON -- Las mantenemos hacia arriba y quitamos el listener para que no se puedan clickar 
-         //item.classList.add('is-flipped');
-         //prevItem.classList.add('is-flipped');
-         //item.removeEventListener('mousedown', startMarking);
-         //prevItem.removeEventListener('mousedown', startMarking);
+         item.classList.add('is-flipped');
+         prevItem.classList.add('is-flipped');
+         item.removeEventListener('mousedown', startMarking);
+         prevItem.removeEventListener('mousedown', startMarking);
+      } else {
+         setTimeout(flipBackAgain, (visibleTime * 1000), item);
       }
+   } else {
+      setTimeout(flipBackAgain, (visibleTime * 1000), item);
    }
-   setTimeout(flipBackAgain, (visibleTime * 1000), item);
+   checkFinish();
    prevItem = item;
 }
 
@@ -145,15 +155,13 @@ function gameEvents() {
  * Método que realiza el cambio de pantalla al final de la partida
  */
 function finishingGame() {
-   let count = parseInt(document.getElementById("throws").value);
-   if (count == 0) {
-      //Cambiar z-index de los paneles (pantalla PLAY AGAIN)
-      document.getElementById("finishedGame").classList.add("finishedGameColor"); //Añadimos la clase de color para las transiciones de la última pantalla
-      document.getElementById("finishedGame").style.zIndex = "2";
-      document.getElementById("game").style.zIndex = "1";
-      document.getElementById("newGame").addEventListener("click",
-         (e) => { location.reload() }); //Se recarga la misma página para empezar una nueva partida
-   }
+   //Cambiar z-index de los paneles (pantalla PLAY AGAIN)
+   document.getElementById("finishedGame").classList.add("finishedGameColor"); //Añadimos la clase de color para las transiciones de la última pantalla
+   document.getElementById("finishedGame").style.zIndex = "2";
+   document.getElementById("game").style.zIndex = "1";
+   document.getElementById("newGame").addEventListener("click",
+      (e) => { location.reload() }); //Se recarga la misma página para empezar una nueva partida
+
 }
 
 /* =======================================
