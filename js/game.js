@@ -43,7 +43,6 @@ function fillUserForm() {
  * Función que establece el tiempo que cada carta permanece visible y el número de tiradas según el nivel de dificultad
  */
 function difficultyDetails() {
-
    let level = difficulty;
    visibleTime = 4 - level;
    throwsLeft = nCards + Math.floor(10 / level);
