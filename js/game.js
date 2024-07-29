@@ -46,7 +46,7 @@ function difficultyDetails() {
 
    let level = difficulty;
    visibleTime = 4 - level;
-   throwsLeft = parseInt(nCards + (20 / level));
+   throwsLeft = nCards + Math.floor(10 / level);
    document.getElementById("throws").value += throwsLeft;
 }
 
@@ -101,8 +101,11 @@ function drawPanel() {
 function checkFinish() {
    let currentScore = parseInt(document.getElementById("score").value);
    let currentThrows = parseInt(document.getElementById("throws").value);
-   if (currentScore == (nCards / 2) || currentThrows == 0) {
+   if (currentScore == Math.floor(nCards / 2) || currentThrows == 0) {
       finishingGame();
+      if(currentScore == Math.floor(nCards / 2)){
+         alert("CONGRATULATIONS!! YOU WON!!");
+      }
    }
 }
 
@@ -123,16 +126,12 @@ function flipBackAgain(item, pos) {
 function startMarking(event) {
    item = event.currentTarget;
    let pos = parseInt(item.id.substring(item.id.indexOf("p") + 1)); //Eliminar "flip" del id del item
-   console.log(pos);
    if (!cardMatch[pos - 1]) {
       item.classList.add('is-flipped');
       if (prevItem != null) {
          //Comparamos las imágenes
-         console.log(item);
          let frontPrev = prevItem.getElementsByTagName("img")[1].src;
          let frontCurrent = item.getElementsByTagName("img")[1].src;
-         console.log("prev", frontPrev);
-         console.log("cur", frontCurrent);
          if (frontPrev == frontCurrent && prevItem.classList.contains('is-flipped')) {
             match = true;
             score++;
